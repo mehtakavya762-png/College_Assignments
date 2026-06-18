@@ -1,5 +1,6 @@
 # Assignment-Day-1
 Online Classes - Assignments
+
 Question 1: What is a variable in C/C++?
 Answer: A variable is a named memory location used to store data that can be changed during
 program execution.
