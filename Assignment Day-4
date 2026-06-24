@@ -1,0 +1,215 @@
+Assignment Day-4
+
+--> Problem 1
+#include <stdio.h>
+int totalStudents = 500;
+
+// Proper function prototypes int add(int a, int b); int calculateAverage(int a, int b); void updateCount(); void displayData(int value);
+
+int main() { int department = 1; // Added semicolon int marks = 90; // Fixed type assignment
+
+// Fix variable scoping: Declare result outside the loop
+int result = 0;
+for(int i = 0; i < 5; i++)
+{
+    result = i * 10;
+}
+printf("Result = %d\n", result);
+
+// Fix pointer safety: Allocate memory before use
+
+int val = 100;
+int *ptr = &val; 
+*ptr = 200;
+
+return 0;
+}
+
+int add(int a, int b) { return a + b; }
+
+int calculateAverage(int a, int b) { return (a + b) / 2; }
+
+void updateCount() { totalStudents += 10; }
+
+void displayData(int value) { printf("Value = %d\n", value); }
+
+--> Problem 2
+#include <stdio.h>
+
+// Declare 'total' as global to use with 'extern'
+
+int total = 0;
+
+void update(); void display(); int add(int a, int b);
+
+int main() { int marks = 90; // Fixed type: removed quotes
+
+int age = 20;              // Removed 'auto' (redundant)
+
+int count = 100;           // Removed 'register' (often ignored)
+
+printf("Program Started\n");
+
+static int visits = 0;
+visits++;
+printf("Visits = %d\n", visits);
+printf("Total = %d\n", total);
+
+// Fixed scoping: declared 'department' in main scope
+
+int department = 1;
+printf("Department = %d\n", department);
+
+// Fixed array out-of-bounds: corrected index
+
+int arr[5];
+arr[0] = 500; 
+
+// Fixed division by zero
+
+
+int a = 10, b = 1; 
+if (b != 0) 
+{
+    printf("Division = %d\n", a / b);
+}
+
+// Fixed pointer safety
+
+int val = 100;
+int *ptr = &val;
+*ptr = 200;
+printf("Pointer Value = %d\n", *ptr);
+
+// Fixed loop logic: removed stray semicolon
+
+while (count > 0)
+{
+    count--;
+}
+
+char grade = 'A'; // Fixed type: single quotes
+printf("Grade = %c\n", grade);
+
+return 0;
+}
+
+void update() { total = total + 1; }
+
+void display() { printf("Display Function\n"); }
+
+int add(int a, int b) { return a + b; }
+
+--> Problem 3
+#include <stdio.h> #include <string.h> #include <stdlib.h>
+
+struct Student { int rollNo; char name[20]; float marks; };
+
+struct Student students[5]; int totalStudents = 0;
+
+// Function prototypes
+
+void addStudent(); void displayStudents(); float calculateAverage(); void generateReport();
+
+int main()
+
+{ int choice; // Added semicolon
+
+printf("Student Management System\n");
+
+while(1)
+{
+    printf("\n1. Add Student\n2. Display Students\n3. Average Marks\n4. Report\n5. Exit\nChoice: ");
+    scanf("%d", &choice);
+
+    switch(choice)
+    {
+        case 1: addStudent(); break;
+        case 2: displayStudents(); break;
+        case 3: printf("Average = %.2f\n", calculateAverage()); break;
+        case 4: generateReport(); break;
+        case 5: exit(0);
+        default: printf("Invalid Choice\n"); // Added semicolon
+        
+    }
+}
+return 0;
+}
+
+void addStudent() { if (totalStudents >= 5) { printf("Database Full\n"); return; } students[totalStudents].rollNo = totalStudents + 1; printf("Enter Name: "); scanf("%s", students[totalStudents].name); printf("Enter Marks: "); scanf("%f", &students[totalStudents].marks); totalStudents++; }
+
+void displayStudents() { for(int i = 0; i < totalStudents; i++) { printf("\nRoll No: %d | Name: %s | Marks: %.2f\n", students[i].rollNo, students[i].name, students[i].marks); } }
+
+float calculateAverage() { if (totalStudents == 0) return 0.0; float sum = 0; for(int i = 0; i < totalStudents; i++)
+
+{
+    sum += students[i].marks;
+}
+return sum / totalStudents;
+}
+
+void generateReport() { if (totalStudents == 0) { printf("No records found.\n"); return; } float highest = students[0].marks; float lowest = students[0].marks;
+
+for(int i = 0; i < totalStudents; i++)
+
+{
+    if(students[i].marks > highest) highest = students[i].marks;
+    if(students[i].marks < lowest) lowest = students[i].marks;
+}
+
+printf("Highest = %.2f\n", highest);
+printf("Lowest = %.2f\n", lowest);
+printf("Total Students = %d\n", totalStudents);
+}
+
+--> Problem 4
+#include <stdio.h> #include <string.h> #include <stdlib.h>
+
+struct Account { int accNo; char name[30]; float balance; };
+
+struct Account accounts[10]; int totalAccounts = 0;
+
+void createAccount() { if (totalAccounts >= 10) { printf("Database Full\n"); return; } static int accountCounter = 1000; accounts[totalAccounts].accNo = accountCounter++; printf("Enter Name : "); scanf("%s", accounts[totalAccounts].name); printf("Enter Balance : "); scanf("%f", &accounts[totalAccounts].balance); totalAccounts++; }
+
+void displayAccounts() { for(int i = 0; i < totalAccounts; i++) { // Fixed loop bounds printf("\nAccount No: %d | Name: %s | Balance: %.2f\n", accounts[i].accNo, accounts[i].name, accounts[i].balance); } }
+
+void generateReport() { if (totalAccounts == 0) return; float total = 0, highest = accounts[0].balance, lowest = accounts[0].balance; for(int i = 0; i < totalAccounts; i++) { total += accounts[i].balance; if(accounts[i].balance > highest) highest = accounts[i].balance; if(accounts[i].balance < lowest) lowest = accounts[i].balance; } printf("Total Balance: %.2f\nAverage: %.2f\nHighest: %.2f\nLowest: %.2f\n", total, total/totalAccounts, highest, lowest); }
+
+void saveAccounts() { FILE *fp = fopen("accounts.txt", "w"); // Fixed to write mode
+
+if (fp != NULL) 
+{
+    fprintf(fp, "%d", totalAccounts);
+    fclose(fp);
+}
+}
+
+--> Problem 5
+#include <stdio.h> #include <string.h> #include <stdlib.h>
+
+struct Book { int bookId; char title[50]; char author[30]; float price; };
+
+struct Book books[20]; int totalBooks = 0;
+
+void addBook() { if (totalBooks >= 20) { printf("Library Full\n"); return; } static int bookCounter = 100; books[totalBooks].bookId = bookCounter++; printf("Enter Title: "); scanf("%s", books[totalBooks].title); printf("Enter Author: "); scanf("%s", books[totalBooks].author); printf("Enter Price: "); scanf("%f", &books[totalBooks].price); totalBooks++; }
+
+void displayBooks() { for(int i = 0; i < totalBooks; i++) { printf("\nID: %d | Title: %s | Author: %s | Price: %.2f\n", books[i].bookId, books[i].title, books[i].author, books[i].price); } }
+
+void generateReport() { if (totalBooks == 0) { printf("No books available.\n"); return; } float totalPrice = 0, highest = books[0].price, lowest = books[0].price;
+
+for(int i = 0; i < totalBooks; i++)
+{
+    totalPrice += books[i].price;
+    if(books[i].price > highest) highest = books[i].price;
+    if(books[i].price < lowest) lowest = books[i].price;
+}
+
+printf("Highest: %.2f, Lowest: %.2f, Average: %.2f, Total Books: %d\n",
+        highest, lowest, totalPrice / totalBooks, totalBooks);
+}
+
+void saveLibrary()
+{ FILE *fp = fopen("library.txt", "w"); 
+   // Fixed to write mode if (fp)
+  { fprintf(fp, "%d", totalBooks); fclose(fp); }
+}
