@@ -1,0 +1,25 @@
+Assignment Day-7
+
+Q1 (GATE 2021 Style)
+T(n) = T(n/2) + T(2n/5) + 7n, T(0) = 1
+==>
+Using the Akra-Bazzi method, we solve for p: (1/2)^p + (2/5)^p = 1. Since p ≈ 0.93 < 1, the linear term 7n dominates.
+Asymptotic Complexity: Θ(n)
+
+Q2 (GATE 2021 Style)
+Condition for T(n) = aT(n/b) + f(n) to be Θ(n log n)
+==>
+This is Case 2 of the Master Theorem. We need f(n) = Θ(n^log_b^a) = Θ(n^1).
+Condition: a = b
+
+Q3 (GATE 2024 Style)
+Tightest running time for single-pass sorted check?
+==>
+A single pass over N elements comparing adjacent pairs performs N-1 comparisons.
+Running Time: Θ(N)
+
+Q4 (GATE 2015 Style)
+Asymptotic order of 1³ + 2³ + ... + n³
+==>
+The sum is equal to (n(n+1)/2)², which is Θ(n⁴).
+Correct Options: Θ(n⁴), O(n⁵), Ω(n³)
